@@ -1,0 +1,14 @@
+/* Estilos das tabelas (extrato de faixas, histórico e tabelas de imposto) */
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.tabela th,
+.tabela td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
