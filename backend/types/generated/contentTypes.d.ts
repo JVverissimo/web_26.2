@@ -480,6 +480,100 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiConsutaConsuta extends Struct.CollectionTypeSchema {
+  collectionName: 'consutas';
+  info: {
+    displayName: 'Consulta';
+    pluralName: 'consutas';
+    singularName: 'consuta';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::consuta.consuta'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    resultado_consulta: Schema.Attribute.Decimal;
+    tipos_imposto: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::tipos-imposto.tipos-imposto'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    usuario: Schema.Attribute.Relation<'manyToOne', 'api::usuario.usuario'>;
+    valor_consulta: Schema.Attribute.Decimal;
+  };
+}
+
+export interface ApiTiposImpostoTiposImposto
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'tipos_impostos';
+  info: {
+    displayName: 'TiposImposto';
+    pluralName: 'tipos-impostos';
+    singularName: 'tipos-imposto';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    consultas: Schema.Attribute.Relation<'oneToMany', 'api::consuta.consuta'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    descricao: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::tipos-imposto.tipos-imposto'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiUsuarioUsuario extends Struct.CollectionTypeSchema {
+  collectionName: 'usuarios';
+  info: {
+    displayName: 'Usuario';
+    pluralName: 'usuarios';
+    singularName: 'usuario';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    consutas: Schema.Attribute.Relation<'oneToMany', 'api::consuta.consuta'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::usuario.usuario'
+    > &
+      Schema.Attribute.Private;
+    login: Schema.Attribute.Text;
+    publishedAt: Schema.Attribute.DateTime;
+    senha: Schema.Attribute.Text;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -1015,6 +1109,9 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::consuta.consuta': ApiConsutaConsuta;
+      'api::tipos-imposto.tipos-imposto': ApiTiposImpostoTiposImposto;
+      'api::usuario.usuario': ApiUsuarioUsuario;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

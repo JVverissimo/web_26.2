@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tipos_impostos",
+  "info": {
+    "singularName": "tipos-imposto",
+    "pluralName": "tipos-impostos",
+    "displayName": "TiposImposto"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "descricao": {
+      "type": "string"
+    },
+    "consultas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::consuta.consuta",
+      "mappedBy": "tipos_imposto"
+    }
+  }
+}

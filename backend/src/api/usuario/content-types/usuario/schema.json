@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "usuarios",
+  "info": {
+    "singularName": "usuario",
+    "pluralName": "usuarios",
+    "displayName": "Usuario"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "login": {
+      "type": "text"
+    },
+    "senha": {
+      "type": "text"
+    },
+    "consutas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::consuta.consuta",
+      "mappedBy": "usuario"
+    }
+  }
+}

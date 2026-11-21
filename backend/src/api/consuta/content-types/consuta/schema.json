@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "consutas",
+  "info": {
+    "singularName": "consuta",
+    "pluralName": "consutas",
+    "displayName": "Consulta"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "valor_consulta": {
+      "type": "decimal"
+    },
+    "resultado_consulta": {
+      "type": "decimal"
+    },
+    "usuario": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::usuario.usuario",
+      "inversedBy": "consutas"
+    },
+    "tipos_imposto": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::tipos-imposto.tipos-imposto",
+      "inversedBy": "consultas"
+    }
+  }
+}
