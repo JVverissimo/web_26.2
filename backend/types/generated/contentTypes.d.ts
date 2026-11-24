@@ -535,12 +535,10 @@ export interface ApiTipoUserTipoUser extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    tipoUser: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    userLogado: Schema.Attribute.Boolean;
-    userNaoLogado: Schema.Attribute.Boolean;
-    userPlus: Schema.Attribute.Boolean;
     usuarios: Schema.Attribute.Relation<'oneToMany', 'api::usuario.usuario'>;
   };
 }

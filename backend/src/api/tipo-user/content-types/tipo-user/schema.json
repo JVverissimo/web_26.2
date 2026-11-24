@@ -11,14 +11,8 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "userLogado": {
-      "type": "boolean"
-    },
-    "userPlus": {
-      "type": "boolean"
-    },
-    "userNaoLogado": {
-      "type": "boolean"
+    "tipoUser": {
+      "type": "string"
     },
     "usuarios": {
       "type": "relation",
