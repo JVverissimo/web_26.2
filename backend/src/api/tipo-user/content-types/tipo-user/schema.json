@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tipo_users",
+  "info": {
+    "singularName": "tipo-user",
+    "pluralName": "tipo-users",
+    "displayName": "tipoUser"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "userLogado": {
+      "type": "boolean"
+    },
+    "userPlus": {
+      "type": "boolean"
+    },
+    "userNaoLogado": {
+      "type": "boolean"
+    },
+    "usuarios": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::usuario.usuario",
+      "mappedBy": "tipo_user"
+    }
+  }
+}

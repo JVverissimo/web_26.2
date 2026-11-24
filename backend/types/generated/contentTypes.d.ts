@@ -514,6 +514,37 @@ export interface ApiConsutaConsuta extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiTipoUserTipoUser extends Struct.CollectionTypeSchema {
+  collectionName: 'tipo_users';
+  info: {
+    displayName: 'tipoUser';
+    pluralName: 'tipo-users';
+    singularName: 'tipo-user';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::tipo-user.tipo-user'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    userLogado: Schema.Attribute.Boolean;
+    userNaoLogado: Schema.Attribute.Boolean;
+    userPlus: Schema.Attribute.Boolean;
+    usuarios: Schema.Attribute.Relation<'oneToMany', 'api::usuario.usuario'>;
+  };
+}
+
 export interface ApiTiposImpostoTiposImposto
   extends Struct.CollectionTypeSchema {
   collectionName: 'tipos_impostos';
@@ -568,6 +599,10 @@ export interface ApiUsuarioUsuario extends Struct.CollectionTypeSchema {
     login: Schema.Attribute.Text;
     publishedAt: Schema.Attribute.DateTime;
     senha: Schema.Attribute.Text;
+    tipo_user: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::tipo-user.tipo-user'
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1110,6 +1145,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::consuta.consuta': ApiConsutaConsuta;
+      'api::tipo-user.tipo-user': ApiTipoUserTipoUser;
       'api::tipos-imposto.tipos-imposto': ApiTiposImpostoTiposImposto;
       'api::usuario.usuario': ApiUsuarioUsuario;
       'plugin::content-releases.release': PluginContentReleasesRelease;

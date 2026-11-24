@@ -95,6 +95,87 @@ Foram adicionadas ao `doc/docIA.md` as tecnologias utilizadas no projeto, os com
 
 ---
 
+## Comando 6 — 20/11/2026 22:09
+
+**Comando:**
+> qual é a rota do strapi
+
+**Resposta:**
+Foi informado que o Strapi está configurado com as rotas padrão na porta `1337`:
+- Servidor base: `http://localhost:1337`
+- Painel admin (CMS): `http://localhost:1337/admin`
+- API REST: `http://localhost:1337/api`
+
+Também foram apontados os arquivos onde essas configurações estão definidas (`backend/.env`, `backend/config/server.ts`, `backend/config/admin.ts`, `backend/config/api.ts`, `frontend/.env` e `frontend/src/services/api.ts`), observando que naquele momento ainda não havia content-types/rotas customizadas em `backend/src/api/`.
+
+**O que foi feito após o comando:**
+- Inspeção somente leitura da estrutura do workspace e dos arquivos de configuração do Strapi (`backend/config/{server,admin,api}.ts`, `backend/.env`), `frontend/.env`, `frontend/vite.config.ts` e `frontend/src/services/api.ts`.
+- Nenhuma alteração foi feita em arquivos ou pastas.
+
+---
+
+## Comando 7 — 20/11/2026 23:12
+
+**Comando:**
+> agora quero que que o proximo commit e push tenha o bd! onde e como configuro isto?
+
+**Resposta:**
+Foi explicado que o banco de dados SQLite do Strapi fica em `backend/.tmp/data.db` (definido em `backend/.env` e `backend/config/database.ts`) e não entrava nos commits porque a pasta `.tmp` estava ignorada tanto no `.gitignore` da raiz quanto no `backend/.gitignore`. Foram apresentadas duas formas de configurar o versionamento do banco:
+1. **Recomendada (editar os `.gitignore`):** substituir `.tmp` por `**/.tmp/*` + `!**/.tmp/data.db` no `.gitignore` da raiz e por `.tmp/*` + `!.tmp/data.db` em `backend/.gitignore`, liberando apenas o `data.db` e mantendo outros arquivos temporários ignorados.
+2. **Alternativa rápida:** usar `git add -f backend/.tmp/data.db` para forçar o rastreamento inicial.
+
+Também foram listados os cuidados ao versionar um banco SQLite (parar o Strapi antes do commit para evitar inconsistências e evitar edições simultâneas em branches diferentes por ser um arquivo binário).
+
+**O que foi feito após o comando:**
+- Inspeção somente leitura de `.gitignore`, `backend/.gitignore`, `backend/config/database.ts` e do diretório `backend/.tmp/`, além da verificação com `git check-ignore` e `git status`.
+- Nenhuma alteração foi feita em arquivos ou pastas até a confirmação do usuário.
+
+---
+
+## Comando 8 — 20/11/2026 23:15
+
+**Comando:**
+> sim aplique as alterações
+
+**Resposta:**
+Foi confirmada a aplicação das regras de exceção nos dois arquivos `.gitignore` e a validação de que `backend/.tmp/data.db` passou a ser rastreável pelo Git enquanto arquivos temporários como `data.db-wal` continuam ignorados, reforçando o lembrete de parar o servidor do Strapi antes de executar `git add`, `git commit` e `git push`.
+
+**O que foi feito após o comando:**
+- Editado `.gitignore` (raiz), substituindo `.tmp` por `**/.tmp/*` e `!**/.tmp/data.db`.
+- Editado `backend/.gitignore`, substituindo `.tmp` por `.tmp/*` e `!.tmp/data.db`.
+- Validado com `git check-ignore -v`, `git status -s` e `git diff` que `backend/.tmp/data.db` está liberado para commit e que arquivos auxiliares (como `backend/.tmp/data.db-wal`) permanecem ignorados.
+
+---
+
+## Comando 9 — 20/11/2026 23:33
+
+**Comando:**
+> resgistre isso no docIA
+
+**Resposta:**
+Foi confirmado o registro dos Comandos 6, 7, 8 e 9 no arquivo `doc/docIA.md`, mantendo o mesmo formato adotado nos registros anteriores (comando original, resposta fornecida e ações executadas).
+
+**O que foi feito após o comando:**
+- Leitura de `doc/docIA.md` para preservar a formatação e numeração sequencial do histórico.
+- Atualização de `doc/docIA.md` com o registro dos Comandos 6, 7, 8 e 9.
+
+---
+
+## Comando 10 — 24/11/2026 16:01
+
+**Comando:**
+> la no doc, crie um docentidadeIA, e faça o entidade relacionamento desse bd em formato de tabela, parecido com modeloBD.png
+
+**Resposta:**
+Foi criado o arquivo `doc/docentidadeIA.md` documentando o modelo entidade-relacionamento completo do banco de dados real implementado no Strapi + SQLite (`backend/.tmp/data.db`), em formato de tabelas no estilo de `doc/modeloBD.png`, incluindo o diagrama Mermaid ER, as 4 entidades de domínio (`consutas`, `usuarios`, `tipo_users` e `tipos_impostos`), a matriz de relacionamentos e cardinalidades (`1 : N`), as tabelas físicas de ligação (`*_lnk`) e as diferenças em relação ao modelo inicial (`modeloBD.png`).
+
+**O que foi feito após o comando:**
+- Inspeção de `doc/modeloBD.png`, dos schemas dos *content-types* em `backend/src/api/{consuta,usuario,tipo-user,tipos-imposto}/content-types/*/schema.json` e do DDL real das tabelas em `backend/.tmp/data.db`.
+- Criação do arquivo `doc/docentidadeIA.md` com o MER em formato de tabelas e diagrama ER.
+- Registro deste Comando 10 em `doc/docIA.md`.
+
+---
+
 # Guia de Tecnologias, Ferramentas e Execução da Aplicação
 
 ## 1. Tecnologias Utilizadas

@@ -22,6 +22,12 @@
       "relation": "oneToMany",
       "target": "api::consuta.consuta",
       "mappedBy": "usuario"
+    },
+    "tipo_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::tipo-user.tipo-user",
+      "inversedBy": "usuarios"
     }
   }
 }
